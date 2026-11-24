@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "DeployLens",
+  "description": "Compare locally captured UI snapshots across deployments.",
+  "version": "0.1.0",
+  "action": {
+    "default_title": "DeployLens",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": [],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}

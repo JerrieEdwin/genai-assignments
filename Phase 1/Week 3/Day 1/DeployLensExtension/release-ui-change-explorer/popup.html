@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeployLens</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="popup">
+  <header class="brand">
+    <div class="brand-mark" aria-hidden="true"></div>
+    <div><h1>DeployLens</h1><p>See what changed. Know where to look.</p></div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Release context</h2>
+      <label>Label <input id="release-label" placeholder="2.4.1"></label>
+      <label>Deployment origin <input id="release-origin" placeholder="https://staging.example.com"></label>
+      <details>
+        <summary>Optional metadata</summary>
+        <label>Commit SHA <input id="release-commit" placeholder="abc1234"></label>
+        <label>Release notes <textarea id="release-notes" rows="2"></textarea></label>
+        <label>Changed files (one per line) <textarea id="release-files" rows="3" placeholder="src/components/Button.tsx"></textarea></label>
+        <label>Page routes/URLs to capture (one per line)
+          <textarea id="release-routes" rows="4" placeholder="/&#10;/account&#10;/checkout&#10;https://staging.example.com/search"></textarea>
+        </label>
+      </details>
+      <button id="create-release" class="primary">Create release</button>
+      <div id="create-status" class="status" role="status"></div>
+    </section>
+
+    <section class="card">
+      <h2>Capture the release page set</h2>
+      <p class="help">Capture the baseline set first, deploy the new release, then capture the same routes as current. This app does not crawl or switch pages automatically.</p>
+      <label>Baseline <select id="baseline-select"><option value="">Create or select a baseline</option></select></label>
+      <label>Current <select id="current-select"><option value="">Create or select a current release</option></select></label>
+      <button id="capture-baseline" class="secondary">Capture active tab as baseline</button>
+      <button id="capture-current" class="secondary">Capture active tab as current</button>
+      <details>
+        <summary>Mask regions</summary>
+        <p class="help">Exclude a fixed rectangle from comparison. Coordinates use visible viewport pixels.</p>
+        <div class="mask-grid">
+          <label>X <input id="mask-x" type="number" min="0" value="0"></label>
+          <label>Y <input id="mask-y" type="number" min="0" value="0"></label>
+          <label>W <input id="mask-w" type="number" min="1" value="100"></label>
+          <label>H <input id="mask-h" type="number" min="1" value="40"></label>
+        </div>
+        <button id="add-mask" type="button" class="text-button">Add mask</button>
+        <ul id="mask-list" class="mask-list"></ul>
+      </details>
+      <div id="capture-status" class="status" role="status"></div>
+    </section>
+
+    <button id="open-review" class="primary">Open comparison review</button>
+  </main>
+
+  <script src="lib/route.js"></script>
+  <script src="lib/storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
